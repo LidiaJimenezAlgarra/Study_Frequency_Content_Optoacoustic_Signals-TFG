@@ -32,18 +32,26 @@ an = 0:pi/50:2*pi;
 r=1e-3;
 punto=zeros(3,1);
 punto(1)=-0.25e-3;
-punto(2)=+0.5e-3;
+punto(2)=-0.5e-3;
 punto(3)=0;
 x= r * cos(an)-0.25e-3;
-y= r * sin(an)+0.5e-3;
+y= r * sin(an)-0.5e-3;
 posNA=zeros(3,length(an));
 posNA(1,:)=x;
 posNA(2,:)=y;
-posNA(3,:)=-2e-3;
+posNA(3,:)=-1.25e-3;
 
 fcilx=zeros(3,100); 
-fcilx(2,:)=0;
-fcilx(3,:)=linspace(-1e-3,-2e-3,100);
+fcily=zeros(3,100); 
+fcilz=zeros(3,100); 
+
+fcilx(1,:)=linspace(-0.5e-3,0.5e-3,100); %tamaño cilindro x
+fcilx(3,:)=-1e-3;
+
+fcily(2,:)=linspace(-0.75e-3,0.75e-3,100); %tamaño cilindro y
+fcily(3,:)=-1e-3;
+
+fcilz(3,:)=linspace(-0.75e-3,-1.25e-3,100); %tamaño cilindro z
 
 
 %% GRID
@@ -81,15 +89,21 @@ end
 %% 3D layout
 figure(3)
 scatter3(S(1,:)*1e3,S(2,:)*1e3,S(3,:)*1e3,'blue');title('3D layout');xlabel('X axis (mm)');ylabel('Y axis (mm)');zlabel('Z axis (mm)'); hold on
-scatter3(S_n(1,:)*1e3,S_n(2,:)*1e3,S_n(3,:)*1e3,'red','filled');%grid
-scatter3(pfuente(1,:)*1e3,pfuente(2,:)*1e3,pfuente(3,:)*1e3);
-%scatter3(fcilx(1,:)*1e3,fcilx(2,:)*1e3,fcilx(3,:)*1e3,'red','filled');%cillinder
-scatter3(posNA(1,:)*1e3,posNA(2,:)*1e3,posNA(3,:)*1e3,'filled','magenta');
-scatter3(punto(1)*1e3,punto(2)*1e3,punto(3)*1e3,'filled','black');%detector position
+%scatter3(S_n(1,:)*1e3,S_n(2,:)*1e3,S_n(3,:)*1e3,'red','filled');%grid
+%scatter3(pfuente(1,:)*1e3,pfuente(2,:)*1e3,pfuente(3,:)*1e3);%cross
+scatter3(fcilx(1,:)*1e3,fcilx(2,:)*1e3,fcilx(3,:)*1e3,'red','filled');%cillinder
+scatter3(fcily(1,:)*1e3,fcily(2,:)*1e3,fcily(3,:)*1e3,'green','filled');%cillinder
+scatter3(fcilz(1,:)*1e3,fcilz(2,:)*1e3,fcilz(3,:)*1e3,'yellow','filled');%cillinder
+
+%scatter3(posNA(1,:)*1e3,posNA(2,:)*1e3,posNA(3,:)*1e3,'filled','magenta');
+%scatter3(linspace(-0.25,0,101)*1e3,linspace(-0.5,0,101)*1e3,posNA(3,:)*1e3,'filled','magenta');
+
+%scatter3(punto(1)*1e3,punto(2)*1e3,punto(3)*1e3,'filled','black');hold off%detector position
 
 % %
 % line(-0.25*ones(100),linspace(0.5,-0.5,100),linspace(0,-2,100),'Color','green','LineWidth',4);hold off
-% legend('Grid','Real scanning points','Sources','NA',''); ylim([-1.5 1.5]); xlim([-2.5 2.5])
+legend('Grid','Cilindro X','Cilindro Y','Cilindro Z'); ylim([-1.5 1.5]); xlim([-2.5 2.5]);zlim([ -1.5 0])
+%legend('Grid','Real scanning points','Sources','NA','Detector'); ylim([-1.5 1.5]); xlim([-2.5 2.5])
 
 %% 2D layout
 tic

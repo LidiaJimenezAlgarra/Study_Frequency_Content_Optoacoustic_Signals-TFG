@@ -1,4 +1,4 @@
-%% 1D acquisition of optoacoustic signals in a 2D grid  %%
+%% 1D acquisition of optoacoustic signals %%
 % this code computes an array of sources (N) in random positions (y) between
 % interval(1) and interval(2).
 % the length of the time-resolved signals is l and the spheres are assumed
@@ -9,8 +9,8 @@
 clear all;
 close all;
 tic
-N=1e6; %number of sources
-vs=1520;  %m/s
+N=1e5; %number of sources
+vs=1500;  %m/s
 p0=1; %u.au
 Rs=10e-6; %m diameter of sphere
 
@@ -76,7 +76,7 @@ plot(f*1e-6,abs(fp(1,1:length(t)/2+1))/max(abs(fp(1,1:length(t)/2+1))));
 hold on; 
 plot(f*1e-6,abs(fp(2,1:length(t)/2+1))/max(abs(fp(2,1:length(t)/2+1)))); 
 legend('Perpendicular', 'Parallel');
-xlabel('MHz'); title('FFT of sigals');xlim([0 150]);
+xlabel('MHz'); title('FFT of signals');xlim([0 150]);
 
 fc=[10E6 120E6]; %cut frequencies
 wn=fc/(fs/2);  
@@ -91,7 +91,7 @@ figure(3)
 plot(t*vs/1e-3,sen_filt(1,:)/max(sen_filt(1,:))); hold on;
 plot(t*vs/1e-3,sen_filt(2,:)/max(sen_filt(2,:))); 
 legend('Perpendicular', 'Parallel');
-xlabel('mm');title('Signal filered'); xlim([0 3]); ylim([-1 1])
+xlabel('mm');title('Signal filtered'); xlim([0 3]); ylim([-1 1])
 hold off
 ffilt=zeros(size(sen_filt));
 ffilt(1,:)=abs(fft(sen_filt(1,:)));
@@ -100,7 +100,8 @@ ffilt(2,:)=abs(fft(sen_filt(2,:)));
 ffilt(2,:)=ffilt(2,:)/max(ffilt(2,:));
 
 figure (4);
-plot(f*1e-6,movmean(ffilt(1,1:length(t)/2+1),6)/max(movmean(ffilt(1,1:length(t)/2+1),6))); 
+plot(f*1e-6,ffilt(1,1:length(t)/2+1)/max(ffilt(1,1:length(t)/2+1))); 
+plot(f*1e-6,movmean(ffilt(1,1:length(t)/2+1),6)/max(movmean(ffilt(1,1:length(t)/2+1),6)));      
 hold on;
 plot(f*1e-6,ffilt(2,1:length(t)/2+1)); 
 legend('Perpendicular', 'Parallel');

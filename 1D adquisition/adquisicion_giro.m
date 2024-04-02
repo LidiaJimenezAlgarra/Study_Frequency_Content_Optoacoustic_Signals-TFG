@@ -1,4 +1,4 @@
-%% SIGNAL ACQUISITION OF OPTOACOUSTIC SIGNALS IN A 2D GRID
+%% SIGNAL ACQUISITION OF OPTOACOUSTIC SIGNALS
 % this code computes the acquisition of optoacoustic signals emited for an
 % array of elements (N) in a line between a and b. After this, a
 % visualization of the layout with the numerical aperture, signal emitors
@@ -11,7 +11,7 @@ clear all
 vs=1500; 
 p0=1; %initial pressure
 Rs=10e-6; %sphere diameter: 
-N=100000; %number of sources
+N=1000; %number of sources
 l=7000; %length of time signal
 
 a=-1e-3; 
@@ -19,7 +19,7 @@ b=1e-3;
 z= a+(b-a).*rand(1,N); %random positions
 pos_fuentes=zeros(3,N); %x, y, z 
 pos_fuentes(3,:)=z; 
-t=linspace(0,6*1e-6,l); %time axist
+t=linspace(0,6*1e-6,l); %seg, time axis
 ceros=zeros(1,l); 
 
 %% DETECTOR POSITIONS(X,0,Z)
@@ -92,12 +92,12 @@ for i=1:19
     hold on
     plot(linspace(0,pos_det(1,i).*1e3),linspace(limup(i).*1e3,pos_det(3,i).*1e3),'g'); %posición límite verde
     plot(linspace(0,pos_det(1,i).*1e3),linspace(0,pos_det(3,i).*1e3),'b'); %posición centro
-    stem(pos_det(1,i).*1e3,pos_det(3,i).*1e3); xlim([-1.25 1.25]); ylim([-1.25 1.25])%xlim([min(pos_det(1,:)-rad/2) max(pos_det(1,:)+rad/2)]);ylim([min(pos_det(3,:)-rad) max(pos_det(3,:)+rad)]); 
-    title(["Detector-sources layout in angle:" num2str(i*step-step) 'º']);xlabel("mm");ylabel("mm") 
+    stem(pos_det(1,i).*1e3,pos_det(3,i).*1e3); xlim([-1.5 1.5]); ylim([-1.5 1.5])%xlim([min(pos_det(1,:)-rad/2) max(pos_det(1,:)+rad/2)]);ylim([min(pos_det(3,:)-rad) max(pos_det(3,:)+rad)]); 
+    title(["Layout in angle:" num2str(i*step-step) 'º']);xlabel("mm");ylabel("mm") 
     plot(pos_fuentes(1,:).*1e3,pos_fuentes(3,:).*1e3); %xlim([min(pos_det(1,:)) max(pos_det(1,:))]);ylim([min(pos_det(3,:)) max(pos_det(3,:))]);
     plot(ceros,linspace(limdown(i).*1e3,limup(i).*1e3,l),'m'); %línea de señal detectada
     hold off
-    pause(0.55)      
+    pause      
 end
 
 %% DATA FILTERING

@@ -7,17 +7,17 @@
 clear all;
 close all;
 
-%% DECLARACIÓN DE VARIABLES
+%% GRID 
 tic
-l=500; %longitud de tiempo y señal
+l=500; % t points
 dx=10e-6; %m
 dy=10e-6; %m
 vs=1500; %m/s
 p0=1; %u.au
-Rs=10e-6; %m 
+Rs=10e-6; %m sphere diameter
 
-pdetX=(-2e-3:dx:2e-3); %ejeX (m) -2 a 2 mm incluido el centro
-pdetY=(-1e-3:dy:1e-3); %ejeY (m) -1 a 1 mm %incluido el centro
+pdetX=(-2e-3:dx:2e-3); %-2 a 2 mm 
+pdetY=(-1e-3:dy:1e-3); %-1 a 1 mm 
 Nx=length(pdetX);
 Ny=length(pdetY);
 
@@ -25,7 +25,7 @@ t=linspace(0,1e-6,l); %seg
 pfuente=[0,0,-1e-3]; %m x, y, z
 S=zeros(Ny,Nx,l);
 
-%% CÁLCULO DE LAS ALINES
+%% RAW DATA ACQUISITION
 for i=1:201
     for j=1:101
         if (pdetX(i)<=5e-4 && pdetX(i)>=-5e-4) && (pdetY(j)>=-5e-4 && pdetY(j)<=5e-4)
@@ -42,18 +42,18 @@ for i=1:201
 end
 toc
 
-%% TRATAMIENTO DE SEÑAL
-S(:,202:end,:)=flip(S(:,1:200,:),2); %POV
-S(102:end,:,:)=flip(S(1:100,:,:),1); %POV
+%% SIGNAL PROCESSING
+S(:,202:end,:)=flip(S(:,1:200,:),2); %symmetry
+S(102:end,:,:)=flip(S(1:100,:,:),1); %symmetry
 
 S_f=zeros(Ny,Nx,l);           
 fs=1/(t(2)-t(1)); %sampling freq
 fsmin=220e6;
 df=fs/l;
 f = (0:df:(fs/2));    
-fc=[10E6 120E6]; %frecuencias de corte
-wn=fc/(fs/2);  %frecuencia normalizada
-[coefb1,coefa1] = butter(2,wn,'bandpass'); %diseños de paso banda y de eliminador de banda resultantes son de orden 2n
+fc=[10E6 120E6]; %cut frequency
+wn=fc/(fs/2);  
+[coefb1,coefa1] = butter(2,wn,'bandpass'); % band pass filter
 
 for i=1:Nx
     S_f(:,i,:)=(filter(coefb1,coefa1,squeeze(S(:,i,:))'))';
@@ -62,7 +62,7 @@ for i=1:Ny
     S_f(i,:,:)=(filter(coefb1,coefa1,squeeze(S(i,:,:))'))';
 end
 
-%% VISUALIZACIÓN BPLANES 
+%% B PLANES VISUALIZATION 
 % change 'XZ' por 'YZ' to change the visualized plane
 % change 0 to 'doble' to visualise the filteres B planes and the normal ones
 figure(1);set(gcf, 'WindowState', 'maximized'); 
@@ -78,22 +78,14 @@ figure(4)
 imagesc(imrotate(squeeze(S_f(101,:,:)),-90)); colorbar; colormap('gray');
 xlabel('Ny:0 mm'); title('Plano XZ');
 
-%% CÁLCULO DE RESOLUCIONES
+%% PARAMETERS
 %%%%  AXIAL  %%%%%
 fs=1/(t(2)-t(1)); %sampling freq
 B=110e6;
 res_axial=0.88*vs/B
-fs>2*B %tiene que dar 1 si lo cambias para cumplir Nyquist
+fs>2*B %1 for Nyquist 
 
-%%%%  LATERAL  %%%%
-D= 1e-3;%diámetro de la detección cross-section (yo creo que 1mm)
-F=0.5; %focal distance
-NA=D/(2*F);
-fc=25*1e6;
-% res_lat=0.71*vs/(fc*NA)
-% dx < res_lat*2  %%tiene que dar 1 para cumplir Nyquist
-
-%% GUARDADO DE VARIABLES
+%% SAVING DATA
 % saveFolderData = ''; %SAVE FOLDER 
 % fileName = datestr(now, 'yyyymmddHHMMSS');
 

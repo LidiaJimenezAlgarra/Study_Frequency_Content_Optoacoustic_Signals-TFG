@@ -14,7 +14,7 @@ dx=10e-6; %m
 dy=10e-6; %m
 vs=1500; %m/s
 p0=1; %u.au
-Rs=10e-6; %m sphere diameter
+Rs=10e-6; %m sphere radius
 
 pdetX=(-2e-3:dx:2e-3); %-2 a 2 mm 
 pdetY=(-1e-3:dy:1e-3); %-1 a 1 mm 
@@ -65,11 +65,11 @@ end
 %% B PLANES VISUALIZATION 
 % change 'XZ' por 'YZ' to change the visualized plane
 % change 0 to 'doble' to visualise the filteres B planes and the normal ones
-figure(1);set(gcf, 'WindowState', 'maximized'); 
-slider(S,'doble',S_f,Nx,Ny,l,t,dx,dy,'XZ');
-
-figure(2);set(gcf, 'WindowState', 'maximized');
-slider(S,0,S_f,Nx,Ny,l,t,dx,dy,'YZ');
+% figure(1);set(gcf, 'WindowState', 'maximized'); 
+% slider(S,'doble',S_f,Nx,Ny,l,t,dx,dy,'XZ');
+% 
+% figure(2);set(gcf, 'WindowState', 'maximized');
+% slider(S,0,S_f,Nx,Ny,l,t,dx,dy,'YZ');
 
 figure(3)
 imagesc(imrotate(squeeze(S_f(:,201,:)),-90)); colorbar; colormap('gray');

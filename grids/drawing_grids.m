@@ -84,16 +84,27 @@ for i=Nx:Nx:N
     end
 end
 
+%%
+cuadrado=zeros(3,441);
+ex1=linspace(-0.5,0.5,21);
+
+for i=21:21:441
+    cuadrado(1,i-20:i)=ex1;
+    cuadrado(2,i-20:i)=ex1(i/21);
+end
+
 % S_n(1,:)=linspace(-2e-3,0,121);
 % S_n(2,:)=linspace(-1e-3,0,121);
 %% 3D layout
 figure(3)
 scatter3(S(1,:)*1e3,S(2,:)*1e3,S(3,:)*1e3,'blue');title('3D layout');xlabel('X axis (mm)');ylabel('Y axis (mm)');zlabel('Z axis (mm)'); hold on
 %scatter3(S_n(1,:)*1e3,S_n(2,:)*1e3,S_n(3,:)*1e3,'red','filled');%grid
+scatter3(cuadrado(1,:),cuadrado(2,:),zeros(1,441),'red','filled');
+scatter3(0,0,0,'black','filled')
 %scatter3(pfuente(1,:)*1e3,pfuente(2,:)*1e3,pfuente(3,:)*1e3);%cross
-scatter3(fcilx(1,:)*1e3,fcilx(2,:)*1e3,fcilx(3,:)*1e3,'red','filled');%cillinder
-scatter3(fcily(1,:)*1e3,fcily(2,:)*1e3,fcily(3,:)*1e3,'green','filled');%cillinder
-scatter3(fcilz(1,:)*1e3,fcilz(2,:)*1e3,fcilz(3,:)*1e3,'yellow','filled');%cillinder
+% scatter3(fcilx(1,:)*1e3,fcilx(2,:)*1e3,fcilx(3,:)*1e3,'red','filled');%cillinder
+% scatter3(fcily(1,:)*1e3,fcily(2,:)*1e3,fcily(3,:)*1e3,'green','filled');%cillinder
+% scatter3(fcilz(1,:)*1e3,fcilz(2,:)*1e3,fcilz(3,:)*1e3,'yellow','filled');%cillinder
 
 %scatter3(posNA(1,:)*1e3,posNA(2,:)*1e3,posNA(3,:)*1e3,'filled','magenta');
 %scatter3(linspace(-0.25,0,101)*1e3,linspace(-0.5,0,101)*1e3,posNA(3,:)*1e3,'filled','magenta');
@@ -101,8 +112,8 @@ scatter3(fcilz(1,:)*1e3,fcilz(2,:)*1e3,fcilz(3,:)*1e3,'yellow','filled');%cillin
 %scatter3(punto(1)*1e3,punto(2)*1e3,punto(3)*1e3,'filled','black');hold off%detector position
 
 % %
-% line(-0.25*ones(100),linspace(0.5,-0.5,100),linspace(0,-2,100),'Color','green','LineWidth',4);hold off
-legend('Grid','Cilindro X','Cilindro Y','Cilindro Z'); ylim([-1.5 1.5]); xlim([-2.5 2.5]);zlim([ -1.5 0])
+% line(-0.25*ones(100),linspace(0.5,-0.5,100),linspace(0,-2,100),'Color','green','LineWidth',4);
+hold off ;legend('Grid','Cilindro X','Cilindro Y','Cilindro Z'); ylim([-1.5 1.5]); xlim([-2.5 2.5]);%zlim([ -1.5 0])
 %legend('Grid','Real scanning points','Sources','NA','Detector'); ylim([-1.5 1.5]); xlim([-2.5 2.5])
 
 %% 2D layout

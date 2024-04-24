@@ -36,17 +36,17 @@ medium.sound_speed, 'DataOrder', 'yzt', 'PosCond', true);
 %% DATA VISUALIZATION
 sensitivity_field1=max(p_xyz,[],1); %YX
 figure (2); 
-imagesc(kgrid.y_vec*1e6,kgrid.x_vec(100:301)*1e6,squeeze(sensitivity_field1(:,:,100:301))); xlabel('um'); ylabel('um');colormap('gray');
+imagesc(kgrid.y_vec*1e3,kgrid.x_vec(100:301)*1e3,squeeze(sensitivity_field1(:,:,100:301))); xlabel('mm'); ylabel('mm');colormap('gray');
 axis('square');title('XY')
 
 sensitivity_field2=max(p_xyz,[],2); %XZ
 figure (3); 
-imagesc(kgrid.x_vec(100:301)*1e6, kgrid.t_array*1e6*vs,squeeze(sensitivity_field2(:,:,100:301))); xlabel('um'); ylabel('um');colormap('gray');
+imagesc(kgrid.x_vec(150:251)*1e3, kgrid.t_array*1e3*vs,squeeze(sensitivity_field2(:,:,150:251))); xlabel('mm'); ylabel('mm');colormap('gray');
 axis('square');title('XZ')
 
 sensitivity_field3=max(p_xyz,[],3); 
 figure (4); 
-imagesc(kgrid.y_vec*1e6,kgrid.t_array*1e6*vs,squeeze(sensitivity_field3)); xlabel('um'); ylabel('um');colormap('gray');
+imagesc(kgrid.y_vec*1e3,kgrid.t_array*1e3*vs,squeeze(sensitivity_field3)); xlabel('mm'); ylabel('mm');colormap('gray');
 axis('square');title('YZ')
 
 %% DATA SAVING

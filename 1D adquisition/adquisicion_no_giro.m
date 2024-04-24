@@ -12,7 +12,7 @@ tic
 N=1e5; %number of sources
 vs=1500;  %m/s
 p0=1; %u.au
-Rs=10e-6; %m diameter of sphere
+Rs=10e-6; %m radius of sphere
 
 pdet=zeros(2,3);
 l=100000; %length t axis
@@ -90,7 +90,7 @@ sen_filt(2,:)=filter(coefb1,coefa1,pp(2,:));
 figure(3)
 plot(t*vs/1e-3,sen_filt(1,:)/max(sen_filt(1,:))); hold on;
 plot(t*vs/1e-3,sen_filt(2,:)/max(sen_filt(2,:))); 
-legend('Perpendicular', 'Parallel');
+legend('Paralela', 'Perpendicular');
 xlabel('mm');title('Signal filtered'); xlim([0 3]); ylim([-1 1])
 hold off
 ffilt=zeros(size(sen_filt));

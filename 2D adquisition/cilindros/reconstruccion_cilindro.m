@@ -11,9 +11,9 @@ close all
 S_temp=S_f;
 
 %% GRID INFORMATION
-l=size(S_temp,3); 
+l=size(S_temp,1); 
 Nx = size(S_temp,2);   % number of grid points in the x (row) direction
-Ny = size(S_temp,1);   % number of grid points in the y (column) direction
+Ny = size(S_temp,3);   % number of grid points in the y (column) direction
 
 dx=10e-6; %m
 dy=10e-6; %m
@@ -28,7 +28,7 @@ medium.alpha_power = 1.5;   % factor to adjust the power law for limiting freque
 medium.density=1000;           % [kg/m^3]
 
 %% PLANAR RECONSTRUCTION
-p_xyz = kspacePlaneRecon(S_temp, kgrid.dy, kgrid.dx, kgrid.dt, ...
+p_xyz = kspacePlaneRecon(S_temp, kgrid.dx, kgrid.dy, kgrid.dt, ...
 medium.sound_speed, 'DataOrder', 'yzt', 'PosCond', true);
 
 %% DATA VISUALIZATION

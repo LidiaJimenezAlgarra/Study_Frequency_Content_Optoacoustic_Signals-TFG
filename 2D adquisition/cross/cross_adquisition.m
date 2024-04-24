@@ -15,7 +15,7 @@ dx=10e-6; %m
 dy=10e-6; %m
 vs=1500; %m/s
 p0=1; %au
-Rs=10e-6; %m sources diameter
+Rs=10e-6; %m sources radius
 
 pdetX=(-2e-3:dx:2e-3); %positions of detector X
 pdetY=(-1e-3:dy:1e-3); %positions of detector Y

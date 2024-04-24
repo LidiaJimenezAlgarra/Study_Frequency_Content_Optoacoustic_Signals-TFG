@@ -15,7 +15,7 @@ dx=10e-6; %m
 dy=10e-6; %m
 vs=1500; %m/s
 p0=1; %u.au
-Rs=10e-6; % diameter of the spheres
+Rs=10e-6; % radius of the spheres
 
 pdetX=(-2e-3:dx:2e-3); %X axis (m) -2 a 2 mm 
 pdetY=(-1e-3:dy:1e-3); %Y axis (m) -1 a 1 mm 
@@ -83,10 +83,10 @@ end
 % change 0 to 'doble' to visualise the filteres B planes and the normal ones
 
 figure(1);set(gcf, 'WindowState', 'maximized'); 
-slider(S,'doble',S_f,Nx,Ny,l,t,dx,dy,'YZ');
+slider(S,'doble',S_f,Nx,Ny,l,t,dx,dy,'XZ');
 
 figure(2);set(gcf, 'WindowState', 'maximized');
-slider(S,0,S_f,Nx,Ny,l,t,dx,dy,'YZ');
+slider(S,0,S_f,Nx,Ny,l,t,dx,dy,'XZ');
 
 figure(3)
 imagesc(squeeze(S_f(:,201,:))'); colorbar; colormap('gray');

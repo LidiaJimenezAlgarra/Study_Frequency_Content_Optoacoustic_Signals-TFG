@@ -49,8 +49,8 @@ axis('square');title('YZ PLANE')
 
 sensitivity_field3=max(p_xyz,[],2); %el máximo de la tercera dimensión 
 figure (4); 
-imagesc(x_vec(100:301),t*1e3*vs,squeeze(sensitivity_field3(:,:,100:301))); xlabel('mm'); ylabel('mm');colormap('gray');
-axis('square');title('Plano XZ')
+imagesc(x_vec(100:301)*1e3,t*1e3*vs,squeeze(sensitivity_field3(:,:,100:301))); xlabel('mm'); ylabel('mm');colormap('gray');ylim([0 1.5])
+title('Plano XZ')
 
 %% SAVING OF RAW DATA
 % saveFolderData = ''; %SAVE FOLDER 

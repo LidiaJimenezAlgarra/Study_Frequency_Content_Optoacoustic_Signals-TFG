@@ -10,8 +10,8 @@ clear all
 
 vs=1500; 
 p0=1; %initial pressure
-Rs=10e-6; %sphere diameter: 
-N=1000; %number of sources
+Rs=10e-6; %sphere radius
+N=100; %number of sources
 l=7000; %length of time signal
 
 a=-1e-3; 

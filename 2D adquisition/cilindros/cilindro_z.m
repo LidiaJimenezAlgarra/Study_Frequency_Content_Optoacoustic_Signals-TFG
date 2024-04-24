@@ -15,13 +15,13 @@ dx=10e-6; %m
 dy=10e-6; %m
 vs=1500; %m/s
 p0=1; %au
-Rs=10e-6; % diameter of the spheres
+Rs=10e-6; % radius of the spheres
 
 pdetX=(-2e-3:dx:2e-3); % X axis (m) -2 a 2 mm 
 pdetY=(-1e-3:dy:1e-3); % Y axis (m) -1 a 1 mm 
 Nx=length(pdetX);
 Ny=length(pdetY);
-N=1e3; % number of sources
+N=1e6; % number of sources
 
 t=linspace(100/l*1e-6,1*1e-6+300/l*1e-6,l); %seg 
 dt=abs(t(1)-t(2));
@@ -97,14 +97,14 @@ xlabel('Ny:0 mm'); title('Plano XZ');
 
 
 %% DATA SAVING
-% saveFolderData = ''; %SAVE FOLDER 
-% fileName = datestr(now, 'yyyymmddHHMMSS');
+saveFolderData = 'C:\Users\Biblioteca\OneDrive - UAM\UAM\4º Curso\TFG\resultados\cilindro_z\1e6\'; %SAVE FOLDER 
+fileName = datestr(now, 'yyyymmddHHMMSS');
 
-% fileName2   = [ fileName '_SAVE_NAME.mat'];
-% save([saveFolderData fileName2], 'VARIABLE_NAME');
+fileName2   = [ fileName '_cilZ_1e6.mat'];
+save([saveFolderData fileName2], 'S_f');
 
-% fileName2   = [ fileName '_SAVE_NAME.png'];
-% saveas(figure(3), [saveFolderData fileName2]);
-% 
-% fileName2   = [ fileName '_SAVE_NAME.png'];
-% saveas(figure(4), [saveFolderData fileName2]);
+fileName2   = [ fileName '_YZ_1e6.png'];
+saveas(figure(3), [saveFolderData fileName2]);
+
+fileName2   = [ fileName '_XZ_1e6.png'];
+saveas(figure(4), [saveFolderData fileName2]);

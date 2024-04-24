@@ -54,8 +54,8 @@ Rhigh = kspacePlaneRecon(sensor_data_rs, kgrid.dz, kgrid.dy, kgrid.dt, medium.so
     'DataOrder', 'yzt');
 
 %% IMAGE PROCESSING
-projlow=squeeze(max(-Rlow,[],3));
-projhigh=squeeze(max(-Rhigh,[],3));
+projlow=squeeze(max(-Rlow,[],2));
+projhigh=squeeze(max(-Rhigh,[],2));
 [alphaval] = alphacalc(projlow,projhigh);
 
 fusx= imfuse(projlow,alphaval*projhigh,'falsecolor','Scaling','joint','ColorChannels',[1 2 0]);

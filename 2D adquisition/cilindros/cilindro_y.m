@@ -14,8 +14,8 @@ dx=10e-6; %m
 dy=10e-6; %m
 vs=1500; %m/s
 p0=1; %au
-Rs=10e-6; %m diameter of sphere
-N=500; %source number
+Rs=10e-6; %m radius of sphere
+N=1e6; %source number
 
 pdetX=(-2e-3:dx:2e-3); % X axis (m) -2 a 2 mm 
 pdetY=(-1e-3:dy:1e-3); % Y axis  (m) -1 a 1 mm

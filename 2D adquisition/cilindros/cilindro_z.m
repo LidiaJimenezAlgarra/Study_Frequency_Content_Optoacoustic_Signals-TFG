@@ -21,7 +21,7 @@ pdetX=(-2e-3:dx:2e-3); % X axis (m) -2 a 2 mm
 pdetY=(-1e-3:dy:1e-3); % Y axis (m) -1 a 1 mm 
 Nx=length(pdetX);
 Ny=length(pdetY);
-N=1e6; % number of sources
+N=2e5; % number of sources
 
 t=linspace(100/l*1e-6,1*1e-6+300/l*1e-6,l); %seg 
 dt=abs(t(1)-t(2));
@@ -57,7 +57,9 @@ for i=1:201
        S(j,i,:)=atemp;
        atemp=0;
     end
-    display(['Acquiring data: ' num2str(round(i/201*100,2)) '% completed'])
+    hora=datetime(now,'ConvertFrom','datenum');
+    hora=datestr(hora);
+    display(['Acquiring data: ' num2str(round(i/201*100,2)) '% completed at ' hora])
 end
 toc
 %% FREQUENCY FILTERING
@@ -82,11 +84,11 @@ for i=1:Ny
 end
 
 %% DATA VISUALIZATION
-figure(1);set(gcf, 'WindowState', 'maximized'); 
-slider(S,'doble',S_f,Nx,Ny,l,t,dx,dy,'XZ');
-
-figure(2);set(gcf, 'WindowState', 'maximized');
-slider(S,0,S_f,Nx,Ny,l,t,dx,dy,'YZ');
+% figure(1);set(gcf, 'WindowState', 'maximized'); 
+% slider(S,'doble',S_f,Nx,Ny,l,t,dx,dy,'XZ');
+% 
+% figure(2);set(gcf, 'WindowState', 'maximized');
+% slider(S,0,S_f,Nx,Ny,l,t,dx,dy,'YZ');
 
 figure(3)
 imagesc(squeeze(S_f(:,201,:))'); colorbar; colormap('gray');
@@ -97,14 +99,14 @@ xlabel('Ny:0 mm'); title('Plano XZ');
 
 
 %% DATA SAVING
-saveFolderData = 'C:\Users\Biblioteca\OneDrive - UAM\UAM\4º Curso\TFG\resultados\cilindro_z\1e6\'; %SAVE FOLDER 
+saveFolderData = 'C:\Users\ljalg\OneDrive - UAM\UAM\4º Curso\TFG\resultados\cilindro_z\2e5\'; %SAVE FOLDER 
 fileName = datestr(now, 'yyyymmddHHMMSS');
 
-fileName2   = [ fileName '_cilZ_1e6.mat'];
+fileName2   = [ fileName '_cilZ_2e5.mat'];
 save([saveFolderData fileName2], 'S_f');
 
-fileName2   = [ fileName '_YZ_1e6.png'];
+fileName2   = [ fileName '_YZ_2e5.png'];
 saveas(figure(3), [saveFolderData fileName2]);
 
-fileName2   = [ fileName '_XZ_1e6.png'];
+fileName2   = [ fileName '_XZ_2e5.png'];
 saveas(figure(4), [saveFolderData fileName2]);

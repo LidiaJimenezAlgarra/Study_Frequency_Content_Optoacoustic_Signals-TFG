@@ -11,9 +11,9 @@ close all
 S_temp=S_f;
 
 %% GRID INFORMATION
-l=size(S_temp,1); 
+l=size(S_temp,3); 
 Nx = size(S_temp,2);   % number of grid points in the x (row) direction
-Ny = size(S_temp,3);   % number of grid points in the y (column) direction
+Ny = size(S_temp,1);   % number of grid points in the y (column) direction
 
 dx=10e-6; %m
 dy=10e-6; %m
@@ -34,7 +34,7 @@ medium.sound_speed, 'DataOrder', 'yzt', 'PosCond', true);
 %% DATA VISUALIZATION
 x_vec=linspace(-2e-3,2e-3,401);
 y_vec=linspace(-1e-3,1e-3,201);
-t=linspace(0,1.0667e-06,500);
+%t=linspace(0,1.0667e-06,500);
 vs=1500;
 
 sensitivity_field1=max(p_xyz,[],1); %YX

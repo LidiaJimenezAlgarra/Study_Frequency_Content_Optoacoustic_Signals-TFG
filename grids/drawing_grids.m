@@ -128,7 +128,7 @@ c=zeros(1,l);
 
 
 pdet(1,:)=[0,1500*1e-6,0]; %0 degrees parallel
-pdet(2,:)=[0,0,1000*1e-6];  %90 degrees perpendicular
+pdet(2,:)=[0,0,1500*1e-6];  %90 degrees perpendicular
 intval=[-1000*1e-6,1000*1e-6 ]; 
 a=intval(1);
 b=intval(2);
